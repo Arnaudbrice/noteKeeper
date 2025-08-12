@@ -1,8 +1,7 @@
 import React from "react";
-import useNotes from "../hooks/useNotes";
 import {Link} from "react-router";
+import useNotes from "../hooks/useNotes";
 
-// access the globale state (use context)
 const Note = (props) => {
   const {notes, setNotes} = useNotes();
   const handleDelete = (id) => {
@@ -17,7 +16,9 @@ const Note = (props) => {
         <p>
           {props.note.content.substring(0, 15)}
           {"... "}
-          <Link className="btn btn-info " to={`/note/:${props.note.id}`}>Read More</Link>
+          <Link className="btn btn-info " to={`/note/:${props.note.id}`}>
+            Read More
+          </Link>
         </p>
         <div className="card-actions">
           <button
