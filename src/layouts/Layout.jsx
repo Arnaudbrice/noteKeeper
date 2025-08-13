@@ -26,7 +26,7 @@ const Layout = () => {
         />
       </div>
 
-      <main className="mx-4">
+      <main className="mx-4 ">
         <Outlet/>
       </main>
       <Footer/>

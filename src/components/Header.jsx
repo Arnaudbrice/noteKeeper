@@ -5,14 +5,20 @@ import NoteContext from "../context/NoteContext.jsx";
 const Header = () => {
   const {notes, setNotes, filteredNotes, setFilteredNotes} =
     useContext(NoteContext);
+  // create a ref to hold reference to the input search field element
   const inputRef = useRef(null);
   const [title, setTitle] = useState("");
+
 
   // handle keydown event for search field focus using cmd+k or ctrl+k keys
   useEffect(() => {
     const handleKeyDown = (event) => {
+
+      // event.metakKey is true if Command (⌘) key is pressed on MacOs
+      // event.ctrlKey is true if control (ctrl) key is pressed on Windows,linux or ChromeOs
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
+        // access the input element and call its focus method
         inputRef.current.focus();
       }
     };
@@ -35,6 +41,36 @@ const Header = () => {
       setFilteredNotes(filteredNotesByTitle);
     } else {
       setFilteredNotes(notes);
+    }
+  };
+
+  /**
+   * display shortcut to use to focus the input search field
+   * @returns {React.JSX.Element|null}
+   */
+  const displayShortcut = () => {
+    if (!navigator.userAgentData?.mobile) {
+      if (navigator.userAgentData?.platform?.toLowerCase().includes("macos")) {
+        return (
+          <>
+            <kbd className="kbd kbd-sm">⌘</kbd>
+            <kbd className="kbd kbd-sm">K</kbd>
+          </>
+        );
+      } else if (
+        navigator.userAgentData?.platform?.toLowerCase().includes("windows") ||
+        navigator.userAgentData?.platform?.toLowerCase().includes("linux") ||
+        navigator.userAgentData?.platform?.toLowerCase().includes("chromeos")
+      ) {
+        return (
+          <>
+            <kbd className="kbd kbd-sm">Ctrl</kbd>
+            <kbd className="kbd kbd-sm">K</kbd>
+          </>
+        );
+      } else {
+        return null;
+      }
     }
   };
 
@@ -73,18 +109,15 @@ const Header = () => {
 
             {/*for the dropdown menu*/}
 
-
             {notes.map((note, index) => (
               <Link
                 className="text-lg text-[#2D4453]  hover:py-6 hover:bg-[#2D4453] btn btn-ghost hover:text-white border-1  border-y-[#2D4453]  "
                 key={index}
-                to={`/note/:${note.id}`}
+                to={`/note/${note.id}`}
               >
                 {note.title}
               </Link>
             ))}
-
-
           </ul>
         </div>
       </div>
@@ -128,17 +161,8 @@ const Header = () => {
             placeholder="Search"
           />
 
-          {navigator.platform.includes("Mac") ? (
-            <>
-              <kbd className="kbd kbd-sm">⌘</kbd>
-              <kbd className="kbd kbd-sm">K</kbd>
-            </>
-          ) : (
-            <>
-              <kbd className="kbd kbd-sm">Ctrl</kbd>
-              <kbd className="kbd kbd-sm">K</kbd>
-            </>
-          )}
+          {/*display shortcut to focus input search field for desktop devices only*/}
+          {displayShortcut()}
         </label>
       </div>
       {/*<div className=" navbar-end ">*/}
