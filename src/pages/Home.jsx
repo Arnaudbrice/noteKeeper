@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <>
       <Form onHandleAddNote={handleAddNote}/>
-      <div className="grid   grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 my-16 ">
+      <div className="grid   grid-cols-[repeat(auto-fill,minmax(290px,1fr))] gap-4 my-16 ">
         {filteredNotes.map((note, index) => (
           <Note key={index} note={note}/>
         ))}

@@ -1,6 +1,6 @@
+import {nanoid} from "nanoid";
 import React, {useState} from "react";
 import {toast} from "react-toastify";
-import {nanoid} from "nanoid";
 
 const Form = (props) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -12,8 +12,13 @@ const Form = (props) => {
 
   const handleChange = (event) => {
     const {name, value} = event.target;
-    setIsClicked(true);
 
+    console.log(value)
+    if (value) {
+      setIsClicked(true);
+    }
+
+    setIsClicked(false);
     setNote((prevNote) => {
       return {...prevNote, [name]: value, id: nanoid()};
     });
@@ -26,7 +31,7 @@ const Form = (props) => {
       toast.error("please fill all fields before submitting");
       return;
     }
-    setIsClicked(!isClicked);
+    setIsClicked(false);
 
     props.onHandleAddNote(note);
     // clear input field
@@ -34,26 +39,36 @@ const Form = (props) => {
   };
 
   return (
-    <form className=" grid place-items-center rounded-box  mx-auto mt-16 space-y-4" onSubmit={handleSubmitNote}>
+    <form className=" grid place-items-center rounded-box  mx-auto mt-16 space-y-4 w-full sm:w-[50%]"
+          onSubmit={handleSubmitNote}>
       <input
         onChange={handleChange}
-        className="input"
+        className="input w-full"
         name="title"
         placeholder="Title"
         value={note.title}
       />
-      {isClicked && (
-        <textarea
+      {(isClicked || note.title.trim().length >= 1) && (
+        <>
+          <label className="placeholder text-black mr-auto"><strong>Take A Note </strong> (
+            use <strong>```code```</strong> for code) and
+            (
+            <strong>**code**</strong> for
+            strong text) "
+          </label><textarea
           onChange={handleChange}
-          className="textarea"
+          className="textarea w-full"
           name="content"
-          placeholder="Take a note..."
+          placeholder="Take a Note...
+           "
           rows="3"
           value={note.content}
-        />
-      )}
+        /></>
 
-      <button className="btn btn-primary">Add Note</button>
+      )
+      }
+
+      <button className="btn bg-[#1676b1] w-full">Add Note</button>
     </form>
   );
 };
