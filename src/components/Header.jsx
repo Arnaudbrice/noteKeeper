@@ -1,9 +1,11 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
+
+import {FaSortAlphaDown} from "react-icons/fa";
 import {Link} from "react-router";
 import NoteContext from "../context/NoteContext.jsx";
 
 const Header = () => {
-  const {notes, setNotes, filteredNotes, setFilteredNotes} =
+  const {notes, setNotes, filteredNotes, setFilteredNotes, isSortClicked, setIsSortClicked} =
     useContext(NoteContext);
   // create a ref to hold reference to the input search field element
   const inputRef = useRef(null);
@@ -74,6 +76,9 @@ const Header = () => {
     }
   };
 
+  const onHandleSort = () => {
+    setIsSortClicked(true);
+  }
   return (
     <div className="text-lg shadow-sm navbar  sm:text-xl bg-[#172A36] ">
       <div className="navbar-start w-[10%]  ">
@@ -164,12 +169,28 @@ const Header = () => {
           {/*display shortcut to focus input search field for desktop devices only*/}
           {displayShortcut()}
         </label>
+
+
+        <button onClick={onHandleSort}
+                className="btn btn-lg  bg-black text-white hover:bg-white hover:text-black  focus:bg-white focus:text-black"
+        >
+          <FaSortAlphaDown>
+            Alphabetically
+          </FaSortAlphaDown>
+        </button>
+
       </div>
       {/*<div className=" navbar-end ">*/}
       {/*  <ul className="justify-around gap-6 px-4 text-xl menu menu-horizontal">*/}
-      {/*    <Link className="text-xl btn btn-ghost" to="/">*/}
-      {/*      Home*/}
-      {/*    </Link>*/}
+
+      {/*    <button onClick={onHandleSort} className="btn"*/}
+      {/*    >*/}
+      {/*      <FaSortAlphaDown>*/}
+      {/*        Alphabetically*/}
+      {/*      </FaSortAlphaDown>*/}
+      {/*    </button>*/}
+
+
       {/*  </ul>*/}
       {/*</div>*/}
     </div>
