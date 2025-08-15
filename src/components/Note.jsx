@@ -28,12 +28,7 @@ const Note = (props) => {
           </span>
         </p>
         <div className="card-actions ml-auto">
-          {/*<button*/}
-          {/*  onClick={() => handleDelete(props.note.id)}*/}
-          {/*  className="btn btn-primary "*/}
-          {/*>*/}
-          {/*  Delete*/}
-          {/*</button>*/}
+         
 
           <MdDeleteForever
             onClick={() => handleDelete(props.note.id)}

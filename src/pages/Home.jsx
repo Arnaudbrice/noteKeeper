@@ -11,11 +11,14 @@ const Home = () => {
 
   const handleAddNote = (note) => {
     setNotes((prevNotes) => {
-      return [...prevNotes, note];
+      return [note, ...prevNotes];
     });
+    localStorage.setItem("notes", JSON.stringify(notes));
 
     toast.success(<div>Successfully added a new Note</div>);
   };
+
+
   return (
     <>
       <Form onHandleAddNote={handleAddNote}/>
