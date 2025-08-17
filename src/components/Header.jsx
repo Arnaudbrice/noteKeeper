@@ -37,7 +37,7 @@ const Header = () => {
 
     if (title.trim() !== "") {
       const filteredNotesByTitle = notes.filter((note) =>
-        note.title.toLowerCase().includes(title.toLowerCase()),
+        note.title.toLowerCase().includes(title.toLowerCase()) || note.content.toLowerCase().includes(title.toLowerCase())
       );
 
       setFilteredNotes(filteredNotesByTitle);
@@ -78,6 +78,7 @@ const Header = () => {
 
   const onHandleSort = () => {
     setIsSortClicked(true);
+
   }
   return (
     <div className="text-lg shadow-sm navbar  sm:text-xl bg-[#172A36] ">
@@ -116,11 +117,11 @@ const Header = () => {
 
             {notes.map((note, index) => (
               <Link
-                className="text-lg text-[#2D4453]  hover:py-6 hover:bg-[#2D4453] btn btn-ghost hover:text-white border-1  border-y-[#2D4453]  "
+                className="text-lg text-[#2D4453] h-15  hover:py-6 hover:bg-[#2D4453] btn btn-ghost hover:text-white border-1  border-y-[#2D4453]  "
                 key={index}
                 to={`/note/${note.id}`}
-              >
-                {note.title}
+              >{note.title.length > 32 ? note.title.substring(0, 32) + " ..." : note.title}
+
               </Link>
             ))}
           </ul>
@@ -129,15 +130,8 @@ const Header = () => {
 
       <div
         className="navbar-center  flex flex-col sm:flex-row justify-center sm:justify-between gap-4 space-y-4 sm:space-y-0   space-x-4 py-4 sm:space-x-0 mx-auto sm:w-[90%] divide divide-y-1 divide-white sm:divide-y-none">
-        <Link to="/">NoteKeeper</Link>
-        {/*<input*/}
-        {/*  onChange={handleSearchInputChange}*/}
-        {/*  type="text"*/}
-        {/*  name="title"*/}
-        {/*  value={title}*/}
-        {/*  placeholder="Search"*/}
-        {/*  className="input input-bordered  w-auto rounded-full"*/}
-        {/*/>*/}
+        <Link className="text-2xl   " to="/">✏︎🗒Notekeeper</Link>
+
 
         <label className="input  input-bordered  w-auto rounded-full">
           <svg

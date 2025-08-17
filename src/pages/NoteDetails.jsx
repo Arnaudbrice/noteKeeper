@@ -18,9 +18,11 @@ const NoteDetails = () => {
 
 
     // Split the text by code blocks
-    const parts = input.split(/(```[\s\S]*?```|\*\*[^*]+\*\*)/g); // Matches triple backticks and double asterisks
+    const parts = input.split(/(```[\s\S]*?```|\*\*[^*]+\*\*)/g).filter(item => item !== "\n" && item !== "\t");
+    ; // Matches triple backticks and double asterisks
 // Matches triple backticks
 
+    console.log("parts", parts)
     return parts.map((part, index) => {
       if (!part) return null;
 
@@ -36,19 +38,33 @@ const NoteDetails = () => {
       // Check for bold text using asterisks
       else if (part.startsWith('**') && part.endsWith('**')) {
         const boldContent = part.slice(2, -2); // Remove the asterisks
+
+        console.log("boldContent", boldContent)
         return (
-          <strong key={index}>
+          <p key={index} className="font-bold">
             {boldContent}
-            <br/>
-          </strong>
+
+          </p>
+
+
         );
-      } else {
+      } else if (part.startsWith('\n\n') || part.endsWith('\n\n')) {
         return part.split('\n').map((line, index) =>
 
-          <span key={index}>
-        {line}
+          <p key={index}>
+            {line}
             <br/>
-      </span>)
+
+          </p>)
+      } else {
+
+        console.log("text split", part.split('\n'))
+        return part.split('\n').map((line, index) =>
+
+          <p key={index}>
+            {line}
+
+          </p>)
       }
     });
 
@@ -56,16 +72,14 @@ const NoteDetails = () => {
   };
 
 
-  console.log("findNote", findNote);
-
   if (!findNote) {
     return <NotFound/>;
   }
   return (<div
     className="grid grid-cols-1  text-black space-y-4 mt-16  w-full  border-1 border-base-100 py-4 px-4 rounded-lg ">
 
-    <h2 className="font-bold text-center text-lg sm:text-xl bg-base-100 text-white py-4">{findNote.title}</h2>
-    <div className="bg-white p-[10px] text-md sm:text-lg  overflow-auto">
+    <h2 className="font-bold text-center text-xl sm:text-2xl bg-base-100 text-white py-4">{findNote.title}</h2>
+    <div className="bg-white p-[10px] text-lg sm:text-xl  overflow-auto">
       {isCodeBlock(findNote.content)}
     </div>
   </div>);
