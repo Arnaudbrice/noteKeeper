@@ -13,7 +13,7 @@ const Home = () => {
     setNotes((prevNotes) => {
       return [note, ...prevNotes];
     });
-    localStorage.setItem("notes", JSON.stringify(notes));
+    // localStorage.setItem("notes", JSON.stringify(notes));
 
     toast.success(<div>Successfully added a new Note</div>);
   };
@@ -24,7 +24,7 @@ const Home = () => {
       <Form onHandleAddNote={handleAddNote}/>
       <div className="grid   grid-cols-[repeat(auto-fill,minmax(290px,1fr))] gap-4 my-16 ">
         {filteredNotes.map((note, index) => (
-          <Note key={index} note={note}/>
+          <Note key={index} id={note.id} note={note}/>
         ))}
       </div>
     </>

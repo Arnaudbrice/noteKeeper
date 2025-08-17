@@ -17,7 +17,7 @@ export const NoteContextProvider = ({children}) => {
   useEffect(() => {
     // This effect stores the notes in localStorage only when notes change
     setFilteredNotes([...notes])
-
+    localStorage.setItem("notes", JSON.stringify(notes));
 
   }, [notes]);
   useEffect(() => {
@@ -34,7 +34,7 @@ export const NoteContextProvider = ({children}) => {
         return 0;
       });
       setFilteredNotes(sortedNotes);
-      
+
     }
 
 

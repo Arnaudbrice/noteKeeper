@@ -61,14 +61,14 @@ const Form = (props) => {
           name="content"
           placeholder="Take a Note...
            "
-          rows="3"
+          rows="10"
           value={note.content}
         /></>
 
       )
       }
 
-      <button className="btn bg-[#1676b1] w-full">Add Note</button>
+      <button className="btn bg-[#1676b1] hover:bg-[#1676b1]/95  w-full ">Add Note</button>
     </form>
   );
 };

@@ -1,6 +1,7 @@
 import {Route, Routes} from "react-router";
 import {NoteContextProvider} from "./context/NoteContext.jsx";
 import Layout from "./layouts/Layout.jsx";
+import Edit from "./pages/Edit.jsx";
 import Home from "./pages/Home.jsx";
 import NoteDetails from "./pages/NoteDetails.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -13,10 +14,11 @@ const App = () => {
           <Route path="/" element={<Layout/>}>
             <Route index element={<Home/>}/>
             <Route path="/note/:noteId" element={<NoteDetails/>}/>
+            <Route path="/note/:noteId/edit" element={<Edit/>}/>
+
+
           </Route>
-
           <Route path="*" element={<NotFound/>}/>
-
 
         </Routes>
       </NoteContextProvider>
