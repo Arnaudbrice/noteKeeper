@@ -1,6 +1,7 @@
 import React from "react";
 
 import {toast} from "react-toastify";
+import Dialog from "../components/Dialog.jsx";
 import Form from "../components/Form";
 import Note from "../components/Note";
 
@@ -18,13 +19,19 @@ const Home = () => {
     toast.success(<div>Successfully added a new Note</div>);
   };
 
-
+ 
   return (
     <>
       <Form onHandleAddNote={handleAddNote}/>
       <div className="grid   grid-cols-[repeat(auto-fill,minmax(290px,1fr))] gap-4 my-16 ">
         {filteredNotes.map((note, index) => (
-          <Note key={index} id={note.id} note={note}/>
+
+          <div key={index}>
+            <Note note={note}>
+              {/* Card-spezifisches Modal */}
+              <Dialog note={note}/>
+            </Note>
+          </div>
         ))}
       </div>
     </>

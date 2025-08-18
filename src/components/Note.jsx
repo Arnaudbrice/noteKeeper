@@ -1,29 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 
-import {MdDeleteForever, MdEditCalendar} from "react-icons/md";
+import {MdEditCalendar} from "react-icons/md";
 import {useNavigate} from "react-router";
-import {toast} from "react-toastify";
-import useNotes from "../hooks/useNotes";
+
 
 const Note = (props) => {
-  const [note, setNote] = useState({
-    id: props.id,
-    title: props.note.title,
-    content: props.note.content,
-  });
-  const {notes, setNotes, filteredNotes} = useNotes();
+
 
   const navigate = useNavigate();
-  const handleDelete = (id) => {
-    const filteredAllNotes = notes.filter((note) => note.id !== id);
 
-    setNotes(filteredAllNotes);
-
-    toast.success(<div>Successfully deleted the {props.note.title} note</div>);
-  };
-  const findNote = filteredNotes.filter((item) => item.id === props.id);
-
-  console.log("findNote", findNote);
 
   return (
     <div
@@ -49,12 +34,11 @@ const Note = (props) => {
             Edit
           </MdEditCalendar>
 
-          <MdDeleteForever
-            onClick={() => handleDelete(props.note.id)}
-            className="btn  btn-secondary w-15 h-15 rounded-full  "
-          />
+
+          {props.children}
         </div>
       </div>
+
     </div>
   );
 };
