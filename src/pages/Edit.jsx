@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router";
-import { toast } from "react-toastify";
+import React, {useState} from "react";
+import {useNavigate, useParams} from "react-router";
+import {toast} from "react-toastify";
 import useNotes from "../hooks/useNotes.jsx";
 
 const Edit = () => {
-  const { noteId } = useParams();
+  const {noteId} = useParams();
 
   const navigate = useNavigate();
-  const { notes, setNotes, filteredNotes, setFilteredNotes } = useNotes();
+  const {notes, setNotes, filteredNotes, setFilteredNotes} = useNotes();
   let findNote = notes.find((singleNote) => singleNote.id === noteId);
 
   console.log("findNote", findNote);
@@ -18,10 +18,10 @@ const Edit = () => {
   });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const {name, value} = event.target;
 
     setNote((prev) => {
-      return { ...prev, [name]: value };
+      return {...prev, [name]: value};
     });
   };
 
@@ -34,7 +34,7 @@ const Edit = () => {
 
     const updatedNote = notes.map((singleNote) => {
       if (singleNote.id === noteId) {
-        return { ...singleNote, ...note };
+        return {...singleNote, ...note};
       } else {
         return singleNote;
       }
@@ -65,8 +65,8 @@ const Edit = () => {
 
       <>
         <label className="placeholder text-black mr-auto">
-          <strong>Take A Note </strong> ( use <strong>```code```</strong> for
-          code) and (<strong>**code**</strong> for strong text) "
+          <strong>Take A Note </strong> ( use <strong>```Your Code```</strong> for
+          code) and (<strong>**your text**</strong> for strong text) "
         </label>
         <textarea
           onChange={handleChange}

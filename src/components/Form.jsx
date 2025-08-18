@@ -51,9 +51,9 @@ const Form = (props) => {
       {(isClicked || note.title.trim().length >= 1) && (
         <>
           <label className="placeholder text-black mr-auto"><strong>Take A Note </strong> (
-            use <strong>```code```</strong> for code) and
+            use <strong>```your code```</strong> for code) and
             (
-            <strong>**code**</strong> for
+            <strong>**your text**</strong> for
             strong text) "
           </label><textarea
           onChange={handleChange}
