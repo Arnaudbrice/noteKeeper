@@ -1,14 +1,10 @@
 import React from "react";
 
-import {MdEditCalendar} from "react-icons/md";
+import {MdDeleteForever, MdEditCalendar} from "react-icons/md";
 import {useNavigate} from "react-router";
 
-
 const Note = (props) => {
-
-
   const navigate = useNavigate();
-
 
   return (
     <div
@@ -34,11 +30,12 @@ const Note = (props) => {
             Edit
           </MdEditCalendar>
 
-
-          {props.children}
+          <MdDeleteForever
+            onClick={() => props.handleClicked(props.note.id)}
+            className="btn  btn-secondary w-15 h-15 rounded-full  "
+          />
         </div>
       </div>
-
     </div>
   );
 };
