@@ -21,6 +21,7 @@ export const NoteContextProvider = ({children}) => {
 
   }, [notes]);
   useEffect(() => {
+    // todo: this in a click event handler outside of the useEffect
     if (isSortClicked) {
       // Create a sorted copy of the notes
       const sortedNotes = [...notes].sort((a, b) => {

@@ -1,6 +1,7 @@
 import React from "react";
 import {useParams} from "react-router";
 
+
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {solarizedlight} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import useNotes from "../hooks/useNotes.jsx";
@@ -8,6 +9,8 @@ import NotFound from "./NotFound.jsx";
 
 const NoteDetails = () => {
   const {notes, setNotes, filteredNotes} = useNotes();
+
+
   const {noteId} = useParams();
 
 
@@ -75,14 +78,21 @@ const NoteDetails = () => {
   if (!findNote) {
     return <NotFound/>;
   }
-  return (<div
-    className="grid grid-cols-1  text-black space-y-4 mt-16  w-full  border-1 border-base-100 py-4 px-4 rounded-lg ">
+  return (
 
-    <h2 className="font-bold text-center text-xl sm:text-2xl bg-base-100 text-white py-4">{findNote.title}</h2>
-    <div className="bg-white p-[10px] text-lg sm:text-xl  overflow-auto">
-      {isCodeBlock(findNote.content)}
+    <div
+      className="grid grid-cols-1  text-black space-y-4 mt-16  w-full  border-1 border-base-100 py-4 px-4 rounded-lg ">
+
+      <h2 className="font-bold text-center text-xl sm:text-2xl bg-base-100 text-white py-4">{findNote.title}</h2>
+      <div className="bg-white p-[10px] text-lg sm:text-xl  overflow-auto">
+        {isCodeBlock(findNote.content)}
+      </div>
+
+
     </div>
-  </div>);
+
+
+  );
 
 
 };
